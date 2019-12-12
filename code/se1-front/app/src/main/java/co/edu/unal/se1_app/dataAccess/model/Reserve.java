@@ -13,6 +13,14 @@ public class Reserve {
 
     private String endDateTime;
 
+    public Reserve(boolean type, Long studentId, Long elementId, String startDateTime, String endDateTime) {
+        this.type = type;
+        this.studentId = studentId;
+        this.elementId = elementId;
+        this.startDateTime = startDateTime;
+        this.endDateTime = endDateTime;
+    }
+
     public Long getId() {
         return id;
     }

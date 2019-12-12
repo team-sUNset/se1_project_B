@@ -5,6 +5,10 @@ public class Office {
 
     private String name;
 
+    public Office(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

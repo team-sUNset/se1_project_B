@@ -9,6 +9,12 @@ public class Equipment {
 
     private int stock;
 
+    public Equipment(String name, int officeID, int stock) {
+        this.name = name;
+        this.officeID = officeID;
+        this.stock = stock;
+    }
+
     public Long getId() {
         return id;
     }
