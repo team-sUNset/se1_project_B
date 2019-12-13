@@ -7,19 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainMenuAdmin">
 
-    <Button
-        android:id="@+id/b_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#F44336"
-        android:text="@string/Usuario"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.191" />
-
     <TextView
         android:id="@+id/textView9"
         android:layout_width="172dp"
@@ -62,7 +49,7 @@
         app:srcCompat="@drawable/un_logo" />
 
     <Button
-        android:id="@+id/b_space"
+        android:id="@+id/c_space"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#F44336"
@@ -75,7 +62,7 @@
         app:layout_constraintVertical_bias="0.327" />
 
     <Button
-        android:id="@+id/b_office"
+        android:id="@+id/c_office"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#F44336"

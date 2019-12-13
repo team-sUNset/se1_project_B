@@ -5,26 +5,21 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/reserve"
+            android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Reservar" />
+            android:title="Eliminar" />
         <item
-            android:id="@+id/offices"
+            android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Oficinas" />
+            android:title="Crear" />
         <item
-            android:id="@+id/history"
+            android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Mi historia" />
+            android:title="@string/menu_slideshow" />
         <item
-            android:id="@+id/active"
+            android:id="@+id/nav_tools"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Prestamos Activos" />
-        <item
-            android:id="@+id/desactive"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Cancelar Prestamo" />
-
+            android:title="@string/menu_tools" />
     </group>
 
     <item android:title="Communicate">

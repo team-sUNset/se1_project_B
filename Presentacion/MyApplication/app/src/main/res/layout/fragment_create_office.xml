@@ -5,84 +5,72 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenuUser">
+    tools:context=".ui.creAdmin.createOfficeFragment">
 
-    <TextView
-        android:id="@+id/textViewSpinner2"
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:text="Implementos:"
+    <EditText
+        android:id="@+id/createOffice2"
+        android:layout_width="298dp"
+        android:layout_height="38dp"
+        android:ems="10"
+        android:hint="ID oficina"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.135"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/spinner_offices"
-        android:layout_width="316dp"
-        android:layout_height="90dp"
-        android:text="opciones"
-        android:textSize="25dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.617" />
+        app:layout_constraintVertical_bias="0.346" />
 
-    <Spinner
-        android:id="@+id/spinner_implements"
-        android:layout_width="316dp"
-        android:layout_height="90dp"
-        android:text="opciones"
-        android:textSize="25dp"
-        android:visibility="visible"
+    <EditText
+        android:id="@+id/createOffice1"
+        android:layout_width="298dp"
+        android:layout_height="38dp"
+        android:ems="10"
+        android:hint="nombre oficina"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.357" />
+        app:layout_constraintVertical_bias="0.243" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/crearOffice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#F44336"
         android:text="CREAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.819" />
+        app:layout_constraintVertical_bias="0.89" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RESERVE"
+        android:text="CREAR OFICINA"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FF5722"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.11" />
+        app:layout_constraintVertical_bias="0.111" />
 
-    <TextView
-        android:id="@+id/textViewSpinner"
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:text="Oficinas:"
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="279dp"
+        android:layout_height="281dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.269" />
+        app:layout_constraintVertical_bias="0.688"
+        app:srcCompat="@drawable/ic_menu_camera" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

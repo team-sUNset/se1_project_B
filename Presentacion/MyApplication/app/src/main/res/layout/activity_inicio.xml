@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainMenuUser">
+    tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -90,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#F44336"
-        android:onClick="open_delete"
+        android:onClick="open_admin"
         android:text="Admin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -104,7 +104,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#F44336"
-        android:onClick="open_user"
         android:text="Usuario"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
