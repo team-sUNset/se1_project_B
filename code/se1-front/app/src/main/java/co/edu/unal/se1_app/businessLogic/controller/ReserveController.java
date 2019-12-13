@@ -18,6 +18,7 @@ public class ReserveController {
         reserveRepository = new ReserveRepository();
         StudentRepository studentRepository = new StudentRepository();
         EquipmentRepository equipmentRepository = new EquipmentRepository();
+        /// Corregir segun tipo
         if( studentRepository.getStudentById( reserve.getStudentId() ) == null ||
                 equipmentRepository.getEquipmentById( reserve.getElementId() ) == null ||
                 !validDate( reserve.getStartDateTime() ) ||

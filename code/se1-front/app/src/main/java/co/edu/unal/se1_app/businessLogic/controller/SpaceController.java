@@ -15,5 +15,5 @@ public class SpaceController {
         spaceRepository = new SpaceRepository();
         return spaceRepository.createSpace( space );
     }
-    
+
 }

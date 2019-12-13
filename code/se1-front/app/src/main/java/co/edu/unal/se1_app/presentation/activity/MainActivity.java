@@ -29,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
         textViewResult = findViewById(R.id.text_view_result);
 
          retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.12:8080/api/")
+                .baseUrl("http://192.168.0.18:8080/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-         deleteStudent();
+         updateStudent();
 
         StudentAPI studentAPI = retrofit.create(StudentAPI.class);
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateStudent(){
-        Student s = new Student( "abcd" , "Esteban" , "Reyes" , "jereyesca@unal.edu.co" );
+        Student s = new Student( "qwerty" , "Esteban" , "Reyes" , "jereyesca@unal.edu.co" );
         StudentAPI studentAPI = retrofit.create(StudentAPI.class);
         Call<Student> call = studentAPI.updateStudent( Long.valueOf(3) , s );
         call.enqueue(new Callback<Student>() {
