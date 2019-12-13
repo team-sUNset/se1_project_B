@@ -6,9 +6,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import co.edu.unal.se1_app.R;
+import co.edu.unal.se1_app.businessLogic.controller.StudentController;
+import co.edu.unal.se1_app.dataAccess.callback.StudentCallback;
+import co.edu.unal.se1_app.dataAccess.model.Student;
 
 public class createFragment extends AppCompatActivity {
 
@@ -31,14 +35,27 @@ public class createFragment extends AppCompatActivity {
                         String password= pass.getText().toString();
                         String email= mail.getText().toString();
                         String apellido= lastName.getText().toString();
-                        Toast toast1 =
-                                Toast.makeText(getApplicationContext(),
-                                        "Usuario: "+usuario, Toast.LENGTH_SHORT);
 
-                        toast1.show();
-                        System.out.println(usuario);
-                        System.out.println(password);
+                        StudentController studentController = new StudentController();
+                        Student newStudent = new Student( password , usuario , apellido , email );
+                        studentController.createStudent(newStudent, new StudentCallback() {
+                            @Override
+                            public void onSuccess(@NonNull Student student) {
+                                System.out.println( "ID " + student.getId() );
+                                Toast toast1 =
+                                        Toast.makeText(getApplicationContext(),
+                                                "Usuario: "+ student.getId().toString() , Toast.LENGTH_SHORT);
+                                toast1.show();
+                            }
 
+                            @Override
+                            public void onError(@NonNull Throwable throwable) {
+                                Toast toast1 =
+                                        Toast.makeText(getApplicationContext(),
+                                                "Error" , Toast.LENGTH_SHORT);
+                                toast1.show();
+                            }
+                        });
                     }
                 });
 

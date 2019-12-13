@@ -1,7 +1,13 @@
 package co.edu.unal.se1_app.dataAccess.repository;
 
+import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.List;
 
+import javax.annotation.Nullable;
+
+import co.edu.unal.se1_app.dataAccess.callback.StudentCallback;
 import co.edu.unal.se1_app.dataAccess.interfaces.StudentAPI;
 import co.edu.unal.se1_app.dataAccess.model.Student;
 import retrofit2.Call;
@@ -13,18 +19,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class StudentRepository {
 
     private Retrofit retrofit;
-    private List<Student> returnList;
-    private Student returnObject;
 
     public StudentRepository( ) {
         this.retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.12:8080/api/")
+                .baseUrl("http://192.168.0.7:8080/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
     public List<Student> getStudents(){
-        returnList = null;
         StudentAPI studentAPI = retrofit.create(StudentAPI.class);
         Call<List<Student>> call = studentAPI.getStudents();
         call.enqueue(new Callback<List<Student>>() {
@@ -34,7 +37,6 @@ public class StudentRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnList = response.body();
             }
 
             @Override
@@ -42,11 +44,10 @@ public class StudentRepository {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
             }
         });
-        return returnList;
+        return null;
     }
 
     public Student getStudentById( Long id ){
-        returnObject = null;
         StudentAPI studentAPI = retrofit.create(StudentAPI.class);
         Call<Student> call = studentAPI.getStudentById( id );
         call.enqueue(new Callback<Student>() {
@@ -56,7 +57,6 @@ public class StudentRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
             }
 
             @Override
@@ -64,11 +64,10 @@ public class StudentRepository {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
             }
         });
-        return returnObject;
+        return null;
     }
 
-    public Student createStudent( Student student ){
-        returnObject = null;
+    public void createStudent( Student student , @Nullable StudentCallback callbacks ){
         StudentAPI studentAPI = retrofit.create(StudentAPI.class);
         Call<Student> call = studentAPI.createStudent( student );
         call.enqueue(new Callback<Student>() {
@@ -78,19 +77,18 @@ public class StudentRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Student> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
     public Student updateStudent( Long id , Student student ){
-        returnObject = null;
         StudentAPI studentAPI = retrofit.create(StudentAPI.class);
         Call<Student> call = studentAPI.updateStudent( id , student );
         call.enqueue(new Callback<Student>() {
@@ -100,7 +98,6 @@ public class StudentRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
             }
 
             @Override
@@ -108,7 +105,7 @@ public class StudentRepository {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
             }
         });
-        return returnObject;
+        return null;
     }
 
     public void deleteStudent( Long id ){
