@@ -1,29 +1,19 @@
-package co.edu.unal.se1back.model;
+package co.edu.unal.se1_app.dataAccess.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-
-/**
- * Created by riperezro on 24/11/19.
- */
-@Entity
-@Table(name = "equipment")
-@EntityListeners(AuditingEntityListener.class)
 public class Equipment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     private String name;
 
-    @NotBlank
     private Long officeID;
 
-    @NotBlank
     private int stock;
+
+    public Equipment(String name, Long officeID, int stock) {
+        this.name = name;
+        this.officeID = officeID;
+        this.stock = stock;
+    }
 
     public Long getId() {
         return id;
