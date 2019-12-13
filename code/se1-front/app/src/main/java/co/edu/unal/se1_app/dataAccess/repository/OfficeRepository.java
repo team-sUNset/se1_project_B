@@ -24,6 +24,7 @@ public class OfficeRepository {
     }
 
     public List<Office> getOffices(){
+        returnList = null;
         OfficeAPI officeAPI = retrofit.create(OfficeAPI.class);
         Call<List<Office>> call = officeAPI.getOffices();
         call.enqueue(new Callback<List<Office>>() {
@@ -45,6 +46,7 @@ public class OfficeRepository {
     }
 
     public Office getOfficeById( Long id ){
+        returnObject = null;
         OfficeAPI officeAPI = retrofit.create(OfficeAPI.class);
         Call<Office> call = officeAPI.getOfficeById( id );
         call.enqueue(new Callback<Office>() {
@@ -66,6 +68,7 @@ public class OfficeRepository {
     }
 
     public Office createOffice( Office office ){
+        returnObject = null;
         OfficeAPI officeAPI = retrofit.create(OfficeAPI.class);
         Call<Office> call = officeAPI.createOffice( office );
         call.enqueue(new Callback<Office>() {
@@ -87,6 +90,7 @@ public class OfficeRepository {
     }
 
     public Office updateOffice( Long id , Office office ){
+        returnObject = null;
         OfficeAPI officeAPI = retrofit.create(OfficeAPI.class);
         Call<Office> call = officeAPI.updateOffice( id , office );
         call.enqueue(new Callback<Office>() {

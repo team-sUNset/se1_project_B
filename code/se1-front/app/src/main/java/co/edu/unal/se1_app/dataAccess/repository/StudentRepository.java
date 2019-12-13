@@ -24,6 +24,7 @@ public class StudentRepository {
     }
 
     public List<Student> getStudents(){
+        returnList = null;
         StudentAPI studentAPI = retrofit.create(StudentAPI.class);
         Call<List<Student>> call = studentAPI.getStudents();
         call.enqueue(new Callback<List<Student>>() {
@@ -45,6 +46,7 @@ public class StudentRepository {
     }
 
     public Student getStudentById( Long id ){
+        returnObject = null;
         StudentAPI studentAPI = retrofit.create(StudentAPI.class);
         Call<Student> call = studentAPI.getStudentById( id );
         call.enqueue(new Callback<Student>() {
@@ -66,6 +68,7 @@ public class StudentRepository {
     }
 
     public Student createStudent( Student student ){
+        returnObject = null;
         StudentAPI studentAPI = retrofit.create(StudentAPI.class);
         Call<Student> call = studentAPI.createStudent( student );
         call.enqueue(new Callback<Student>() {
@@ -87,6 +90,7 @@ public class StudentRepository {
     }
 
     public Student updateStudent( Long id , Student student ){
+        returnObject = null;
         StudentAPI studentAPI = retrofit.create(StudentAPI.class);
         Call<Student> call = studentAPI.updateStudent( id , student );
         call.enqueue(new Callback<Student>() {

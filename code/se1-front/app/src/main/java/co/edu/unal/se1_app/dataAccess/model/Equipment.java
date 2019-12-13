@@ -5,11 +5,11 @@ public class Equipment {
 
     private String name;
 
-    private int officeID;
+    private Long officeID;
 
     private int stock;
 
-    public Equipment(String name, int officeID, int stock) {
+    public Equipment(String name, Long officeID, int stock) {
         this.name = name;
         this.officeID = officeID;
         this.stock = stock;
@@ -31,11 +31,11 @@ public class Equipment {
         this.name = name;
     }
 
-    public int getOfficeID() {
+    public Long getOfficeID() {
         return officeID;
     }
 
-    public void setOfficeID(int officeID) {
+    public void setOfficeID(Long officeID) {
         this.officeID = officeID;
     }
 

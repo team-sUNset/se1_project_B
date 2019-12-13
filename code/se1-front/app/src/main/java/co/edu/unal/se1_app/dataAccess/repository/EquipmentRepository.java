@@ -24,6 +24,7 @@ public class EquipmentRepository {
     }
 
     public List<Equipment> getEquipment(){
+        returnList = null;
         EquipmentAPI equipmentAPI = retrofit.create(EquipmentAPI.class);
         Call<List<Equipment>> call = equipmentAPI.getEquipment();
         call.enqueue(new Callback<List<Equipment>>() {
@@ -45,6 +46,7 @@ public class EquipmentRepository {
     }
 
     public Equipment getEquipmentById( Long id ){
+        returnObject = null;
         EquipmentAPI equipmentAPI = retrofit.create(EquipmentAPI.class);
         Call<Equipment> call = equipmentAPI.getEquipmentById( id );
         call.enqueue(new Callback<Equipment>() {
@@ -66,6 +68,7 @@ public class EquipmentRepository {
     }
 
     public Equipment createEquipment( Equipment equipment ){
+        returnObject = null;
         EquipmentAPI equipmentAPI = retrofit.create(EquipmentAPI.class);
         Call<Equipment> call = equipmentAPI.createEquipment( equipment );
         call.enqueue(new Callback<Equipment>() {
@@ -86,9 +89,10 @@ public class EquipmentRepository {
         return returnObject;
     }
 
-    public Equipment updateEquipment( Long id , Equipment admin ){
+    public Equipment updateEquipment( Long id , Equipment equipment ){
+        returnObject = null;
         EquipmentAPI equipmentAPI = retrofit.create(EquipmentAPI.class);
-        Call<Equipment> call = equipmentAPI.updateEquipment( id , admin );
+        Call<Equipment> call = equipmentAPI.updateEquipment( id , equipment );
         call.enqueue(new Callback<Equipment>() {
             @Override
             public void onResponse(Call<Equipment> call, Response<Equipment> response) {

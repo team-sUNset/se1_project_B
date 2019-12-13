@@ -24,6 +24,7 @@ public class AdminRepository {
     }
 
     public List<Admin> getAdmins(){
+        returnList = null;
         AdminAPI adminAPI = retrofit.create(AdminAPI.class);
         Call<List<Admin>> call = adminAPI.getAdmins();
         call.enqueue(new Callback<List<Admin>>() {
@@ -45,6 +46,7 @@ public class AdminRepository {
     }
 
     public Admin getAdminById( Long id ){
+        returnObject = null;
         AdminAPI adminAPI = retrofit.create(AdminAPI.class);
         Call<Admin> call = adminAPI.getAdminById( id );
         call.enqueue(new Callback<Admin>() {
@@ -66,6 +68,7 @@ public class AdminRepository {
     }
 
     public Admin createAdmin( Admin admin ){
+        returnObject = null;
         AdminAPI adminAPI = retrofit.create(AdminAPI.class);
         Call<Admin> call = adminAPI.createAdmin( admin );
         call.enqueue(new Callback<Admin>() {
@@ -87,6 +90,7 @@ public class AdminRepository {
     }
 
     public Admin updateAdmin( Long id , Admin admin ){
+        returnObject = null;
         AdminAPI adminAPI = retrofit.create(AdminAPI.class);
         Call<Admin> call = adminAPI.updateAdmin( id , admin );
         call.enqueue(new Callback<Admin>() {

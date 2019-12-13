@@ -24,6 +24,7 @@ public class ReserveRepository {
     }
 
     public List<Reserve> getReserves(){
+        returnList = null;
         ReserveAPI reserveAPI = retrofit.create(ReserveAPI.class);
         Call<List<Reserve>> call = reserveAPI.getReserves();
         call.enqueue(new Callback<List<Reserve>>() {
@@ -45,6 +46,7 @@ public class ReserveRepository {
     }
 
     public Reserve getReserveById( Long id ){
+        returnObject = null;
         ReserveAPI reserveAPI = retrofit.create(ReserveAPI.class);
         Call<Reserve> call = reserveAPI.getReserveById( id );
         call.enqueue(new Callback<Reserve>() {
@@ -66,6 +68,7 @@ public class ReserveRepository {
     }
 
     public Reserve createReserve( Reserve reserve ){
+        returnObject = null;
         ReserveAPI reserveAPI = retrofit.create(ReserveAPI.class);
         Call<Reserve> call = reserveAPI.createReserve( reserve );
         call.enqueue(new Callback<Reserve>() {
@@ -87,6 +90,7 @@ public class ReserveRepository {
     }
 
     public Reserve updateReserve( Long id , Reserve reserve ){
+        returnObject = null;
         ReserveAPI reserveAPI = retrofit.create(ReserveAPI.class);
         Call<Reserve> call = reserveAPI.updateReserve( id , reserve );
         call.enqueue(new Callback<Reserve>() {

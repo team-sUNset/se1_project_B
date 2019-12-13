@@ -24,6 +24,7 @@ public class SpaceRepository {
     }
 
     public List<Space> getSpaces(){
+        returnList = null;
         SpaceAPI spaceAPI = retrofit.create(SpaceAPI.class);
         Call<List<Space>> call = spaceAPI.getSpaces();
         call.enqueue(new Callback<List<Space>>() {
@@ -45,6 +46,7 @@ public class SpaceRepository {
     }
 
     public Space getSpaceById( Long id ){
+        returnObject = null;
         SpaceAPI spaceAPI = retrofit.create(SpaceAPI.class);
         Call<Space> call = spaceAPI.getSpaceById( id );
         call.enqueue(new Callback<Space>() {
@@ -66,6 +68,7 @@ public class SpaceRepository {
     }
 
     public Space createSpace( Space space ){
+        returnObject = null;
         SpaceAPI spaceAPI = retrofit.create(SpaceAPI.class);
         Call<Space> call = spaceAPI.createSpace( space );
         call.enqueue(new Callback<Space>() {
@@ -87,6 +90,7 @@ public class SpaceRepository {
     }
 
     public Space updateSpace( Long id , Space space ){
+        returnObject = null;
         SpaceAPI spaceAPI = retrofit.create(SpaceAPI.class);
         Call<Space> call = spaceAPI.updateSpace( id , space );
         call.enqueue(new Callback<Space>() {
