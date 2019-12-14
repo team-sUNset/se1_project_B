@@ -2,6 +2,10 @@ package co.edu.unal.se1_app.dataAccess.repository;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
+import co.edu.unal.se1_app.dataAccess.callback.AdminCallback;
+import co.edu.unal.se1_app.dataAccess.callback.AdminListCallback;
 import co.edu.unal.se1_app.dataAccess.interfaces.AdminAPI;
 import co.edu.unal.se1_app.dataAccess.model.Admin;
 import retrofit2.Call;
@@ -13,8 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AdminRepository {
 
     private Retrofit retrofit;
-    private List<Admin> returnList;
-    private Admin returnObject;
 
     public AdminRepository( ) {
         this.retrofit = new Retrofit.Builder()
@@ -23,8 +25,7 @@ public class AdminRepository {
                 .build();
     }
 
-    public List<Admin> getAdmins(){
-        returnList = null;
+    public void getAdmins( @Nullable AdminListCallback callbacks ){
         AdminAPI adminAPI = retrofit.create(AdminAPI.class);
         Call<List<Admin>> call = adminAPI.getAdmins();
         call.enqueue(new Callback<List<Admin>>() {
@@ -34,19 +35,18 @@ public class AdminRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnList = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<List<Admin>> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnList;
     }
 
-    public Admin getAdminById( Long id ){
-        returnObject = null;
+    public void getAdminById( Long id , @Nullable AdminCallback callbacks ){
         AdminAPI adminAPI = retrofit.create(AdminAPI.class);
         Call<Admin> call = adminAPI.getAdminById( id );
         call.enqueue(new Callback<Admin>() {
@@ -56,19 +56,18 @@ public class AdminRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Admin> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
-    public Admin createAdmin( Admin admin ){
-        returnObject = null;
+    public void createAdmin( Admin admin , @Nullable AdminCallback callbacks ){
         AdminAPI adminAPI = retrofit.create(AdminAPI.class);
         Call<Admin> call = adminAPI.createAdmin( admin );
         call.enqueue(new Callback<Admin>() {
@@ -78,19 +77,18 @@ public class AdminRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Admin> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
-    public Admin updateAdmin( Long id , Admin admin ){
-        returnObject = null;
+    public void updateAdmin( Long id , Admin admin , @Nullable AdminCallback callbacks ){
         AdminAPI adminAPI = retrofit.create(AdminAPI.class);
         Call<Admin> call = adminAPI.updateAdmin( id , admin );
         call.enqueue(new Callback<Admin>() {
@@ -100,15 +98,15 @@ public class AdminRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Admin> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
     public void deleteAdmin( Long id ){

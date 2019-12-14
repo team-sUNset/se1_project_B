@@ -2,6 +2,10 @@ package co.edu.unal.se1_app.dataAccess.repository;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
+import co.edu.unal.se1_app.dataAccess.callback.EquipmentCallback;
+import co.edu.unal.se1_app.dataAccess.callback.EquipmentListCallback;
 import co.edu.unal.se1_app.dataAccess.interfaces.EquipmentAPI;
 import co.edu.unal.se1_app.dataAccess.model.Equipment;
 import retrofit2.Call;
@@ -13,8 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class EquipmentRepository {
 
     private Retrofit retrofit;
-    private List<Equipment> returnList;
-    private Equipment returnObject;
 
     public EquipmentRepository( ) {
         this.retrofit = new Retrofit.Builder()
@@ -23,8 +25,7 @@ public class EquipmentRepository {
                 .build();
     }
 
-    public List<Equipment> getEquipment(){
-        returnList = null;
+    public void getEquipment( @Nullable EquipmentListCallback callbacks ){
         EquipmentAPI equipmentAPI = retrofit.create(EquipmentAPI.class);
         Call<List<Equipment>> call = equipmentAPI.getEquipment();
         call.enqueue(new Callback<List<Equipment>>() {
@@ -34,19 +35,18 @@ public class EquipmentRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnList = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<List<Equipment>> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnList;
     }
 
-    public Equipment getEquipmentById( Long id ){
-        returnObject = null;
+    public void getEquipmentById( Long id , @Nullable EquipmentCallback callbacks ){
         EquipmentAPI equipmentAPI = retrofit.create(EquipmentAPI.class);
         Call<Equipment> call = equipmentAPI.getEquipmentById( id );
         call.enqueue(new Callback<Equipment>() {
@@ -56,19 +56,18 @@ public class EquipmentRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Equipment> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
-    public Equipment createEquipment( Equipment equipment ){
-        returnObject = null;
+    public void createEquipment( Equipment equipment , @Nullable EquipmentCallback callbacks ){
         EquipmentAPI equipmentAPI = retrofit.create(EquipmentAPI.class);
         Call<Equipment> call = equipmentAPI.createEquipment( equipment );
         call.enqueue(new Callback<Equipment>() {
@@ -78,19 +77,18 @@ public class EquipmentRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Equipment> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
-    public Equipment updateEquipment( Long id , Equipment equipment ){
-        returnObject = null;
+    public void updateEquipment( Long id , Equipment equipment , @Nullable EquipmentCallback callbacks ){
         EquipmentAPI equipmentAPI = retrofit.create(EquipmentAPI.class);
         Call<Equipment> call = equipmentAPI.updateEquipment( id , equipment );
         call.enqueue(new Callback<Equipment>() {
@@ -100,15 +98,15 @@ public class EquipmentRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Equipment> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
     public void deleteEquipment( Long id ){

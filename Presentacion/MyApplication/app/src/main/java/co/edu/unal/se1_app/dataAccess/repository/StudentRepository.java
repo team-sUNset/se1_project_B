@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import co.edu.unal.se1_app.dataAccess.callback.StudentCallback;
+import co.edu.unal.se1_app.dataAccess.callback.StudentListCallback;
 import co.edu.unal.se1_app.dataAccess.interfaces.StudentAPI;
 import co.edu.unal.se1_app.dataAccess.model.Student;
 import retrofit2.Call;
@@ -27,7 +28,7 @@ public class StudentRepository {
                 .build();
     }
 
-    public List<Student> getStudents(){
+    public void getStudents( @Nullable StudentListCallback callbacks ){
         StudentAPI studentAPI = retrofit.create(StudentAPI.class);
         Call<List<Student>> call = studentAPI.getStudents();
         call.enqueue(new Callback<List<Student>>() {
@@ -37,17 +38,18 @@ public class StudentRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<List<Student>> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return null;
     }
 
-    public Student getStudentById( Long id ){
+    public void getStudentById( Long id , @Nullable StudentCallback callbacks  ){
         StudentAPI studentAPI = retrofit.create(StudentAPI.class);
         Call<Student> call = studentAPI.getStudentById( id );
         call.enqueue(new Callback<Student>() {
@@ -57,14 +59,15 @@ public class StudentRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Student> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return null;
     }
 
     public void createStudent( Student student , @Nullable StudentCallback callbacks ){
@@ -88,7 +91,7 @@ public class StudentRepository {
         });
     }
 
-    public Student updateStudent( Long id , Student student ){
+    public void updateStudent( Long id , Student student , @Nullable StudentCallback callbacks  ){
         StudentAPI studentAPI = retrofit.create(StudentAPI.class);
         Call<Student> call = studentAPI.updateStudent( id , student );
         call.enqueue(new Callback<Student>() {
@@ -98,14 +101,15 @@ public class StudentRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Student> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return null;
     }
 
     public void deleteStudent( Long id ){

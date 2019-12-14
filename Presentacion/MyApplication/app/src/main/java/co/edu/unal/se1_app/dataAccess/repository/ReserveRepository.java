@@ -2,6 +2,10 @@ package co.edu.unal.se1_app.dataAccess.repository;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
+import co.edu.unal.se1_app.dataAccess.callback.ReserveCallback;
+import co.edu.unal.se1_app.dataAccess.callback.ReserveListCallback;
 import co.edu.unal.se1_app.dataAccess.interfaces.ReserveAPI;
 import co.edu.unal.se1_app.dataAccess.model.Reserve;
 import retrofit2.Call;
@@ -13,8 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ReserveRepository {
 
     private Retrofit retrofit;
-    private List<Reserve> returnList;
-    private Reserve returnObject;
 
     public ReserveRepository( ) {
         this.retrofit = new Retrofit.Builder()
@@ -23,8 +25,7 @@ public class ReserveRepository {
                 .build();
     }
 
-    public List<Reserve> getReserves(){
-        returnList = null;
+    public void getReserves( @Nullable ReserveListCallback callbacks ){
         ReserveAPI reserveAPI = retrofit.create(ReserveAPI.class);
         Call<List<Reserve>> call = reserveAPI.getReserves();
         call.enqueue(new Callback<List<Reserve>>() {
@@ -34,19 +35,18 @@ public class ReserveRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnList = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<List<Reserve>> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnList;
     }
 
-    public Reserve getReserveById( Long id ){
-        returnObject = null;
+    public void getReserveById( Long id , @Nullable ReserveCallback callbacks ){
         ReserveAPI reserveAPI = retrofit.create(ReserveAPI.class);
         Call<Reserve> call = reserveAPI.getReserveById( id );
         call.enqueue(new Callback<Reserve>() {
@@ -56,19 +56,18 @@ public class ReserveRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Reserve> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
-    public Reserve createReserve( Reserve reserve ){
-        returnObject = null;
+    public void createReserve( Reserve reserve , @Nullable ReserveCallback callbacks ){
         ReserveAPI reserveAPI = retrofit.create(ReserveAPI.class);
         Call<Reserve> call = reserveAPI.createReserve( reserve );
         call.enqueue(new Callback<Reserve>() {
@@ -78,19 +77,18 @@ public class ReserveRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Reserve> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
-    public Reserve updateReserve( Long id , Reserve reserve ){
-        returnObject = null;
+    public void updateReserve( Long id , Reserve reserve , @Nullable ReserveCallback callbacks ){
         ReserveAPI reserveAPI = retrofit.create(ReserveAPI.class);
         Call<Reserve> call = reserveAPI.updateReserve( id , reserve );
         call.enqueue(new Callback<Reserve>() {
@@ -100,15 +98,15 @@ public class ReserveRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Reserve> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
     public void deleteReserve( Long id ){

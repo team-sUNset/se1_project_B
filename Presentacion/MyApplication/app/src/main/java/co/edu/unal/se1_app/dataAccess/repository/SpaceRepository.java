@@ -2,6 +2,10 @@ package co.edu.unal.se1_app.dataAccess.repository;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
+import co.edu.unal.se1_app.dataAccess.callback.SpaceCallback;
+import co.edu.unal.se1_app.dataAccess.callback.SpaceListCallback;
 import co.edu.unal.se1_app.dataAccess.interfaces.SpaceAPI;
 import co.edu.unal.se1_app.dataAccess.model.Space;
 import retrofit2.Call;
@@ -13,8 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class SpaceRepository {
 
     private Retrofit retrofit;
-    private List<Space> returnList;
-    private Space returnObject;
 
     public SpaceRepository( ) {
         this.retrofit = new Retrofit.Builder()
@@ -23,8 +25,7 @@ public class SpaceRepository {
                 .build();
     }
 
-    public List<Space> getSpaces(){
-        returnList = null;
+    public void getSpaces( @Nullable SpaceListCallback callbacks ){
         SpaceAPI spaceAPI = retrofit.create(SpaceAPI.class);
         Call<List<Space>> call = spaceAPI.getSpaces();
         call.enqueue(new Callback<List<Space>>() {
@@ -34,19 +35,18 @@ public class SpaceRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnList = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<List<Space>> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnList;
     }
 
-    public Space getSpaceById( Long id ){
-        returnObject = null;
+    public void getSpaceById( Long id , @Nullable SpaceCallback callbacks ){
         SpaceAPI spaceAPI = retrofit.create(SpaceAPI.class);
         Call<Space> call = spaceAPI.getSpaceById( id );
         call.enqueue(new Callback<Space>() {
@@ -56,19 +56,18 @@ public class SpaceRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Space> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
-    public Space createSpace( Space space ){
-        returnObject = null;
+    public void createSpace( Space space , @Nullable SpaceCallback callbacks ){
         SpaceAPI spaceAPI = retrofit.create(SpaceAPI.class);
         Call<Space> call = spaceAPI.createSpace( space );
         call.enqueue(new Callback<Space>() {
@@ -78,19 +77,18 @@ public class SpaceRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Space> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
-    public Space updateSpace( Long id , Space space ){
-        returnObject = null;
+    public void updateSpace( Long id , Space space , @Nullable SpaceCallback callbacks ){
         SpaceAPI spaceAPI = retrofit.create(SpaceAPI.class);
         Call<Space> call = spaceAPI.updateSpace( id , space );
         call.enqueue(new Callback<Space>() {
@@ -100,15 +98,15 @@ public class SpaceRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Space> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
     public void deleteSpace( Long id ){

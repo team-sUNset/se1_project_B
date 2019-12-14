@@ -2,6 +2,10 @@ package co.edu.unal.se1_app.dataAccess.repository;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
+import co.edu.unal.se1_app.dataAccess.callback.OfficeCallback;
+import co.edu.unal.se1_app.dataAccess.callback.OfficeListCallback;
 import co.edu.unal.se1_app.dataAccess.interfaces.OfficeAPI;
 import co.edu.unal.se1_app.dataAccess.model.Office;
 import retrofit2.Call;
@@ -13,8 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class OfficeRepository {
 
     private Retrofit retrofit;
-    private List<Office> returnList;
-    private Office returnObject;
 
     public OfficeRepository( ) {
         this.retrofit = new Retrofit.Builder()
@@ -23,8 +25,7 @@ public class OfficeRepository {
                 .build();
     }
 
-    public List<Office> getOffices(){
-        returnList = null;
+    public void getOffices( @Nullable OfficeListCallback callbacks ){
         OfficeAPI officeAPI = retrofit.create(OfficeAPI.class);
         Call<List<Office>> call = officeAPI.getOffices();
         call.enqueue(new Callback<List<Office>>() {
@@ -34,19 +35,18 @@ public class OfficeRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnList = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<List<Office>> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnList;
     }
 
-    public Office getOfficeById( Long id ){
-        returnObject = null;
+    public void getOfficeById( Long id , @Nullable OfficeCallback callbacks ){
         OfficeAPI officeAPI = retrofit.create(OfficeAPI.class);
         Call<Office> call = officeAPI.getOfficeById( id );
         call.enqueue(new Callback<Office>() {
@@ -56,19 +56,18 @@ public class OfficeRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Office> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
-    public Office createOffice( Office office ){
-        returnObject = null;
+    public void createOffice( Office office , @Nullable OfficeCallback callbacks ){
         OfficeAPI officeAPI = retrofit.create(OfficeAPI.class);
         Call<Office> call = officeAPI.createOffice( office );
         call.enqueue(new Callback<Office>() {
@@ -78,19 +77,18 @@ public class OfficeRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Office> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
-    public Office updateOffice( Long id , Office office ){
-        returnObject = null;
+    public void updateOffice( Long id , Office office , @Nullable OfficeCallback callbacks ){
         OfficeAPI officeAPI = retrofit.create(OfficeAPI.class);
         Call<Office> call = officeAPI.updateOffice( id , office );
         call.enqueue(new Callback<Office>() {
@@ -100,15 +98,15 @@ public class OfficeRepository {
                     System.out.println( "Code: " + response.code() + "\n" );
                     return;
                 }
-                returnObject = response.body();
+                callbacks.onSuccess( response.body() );
             }
 
             @Override
             public void onFailure(Call<Office> call, Throwable t) {
                 System.out.println( "Message : " + t.getMessage() + "\n" );
+                callbacks.onError( t );
             }
         });
-        return returnObject;
     }
 
     public void deleteOffice( Long id ){
