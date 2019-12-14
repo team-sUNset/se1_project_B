@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import co.edu.unal.se1_app.dataAccess.callback.AdminCallback;
 import co.edu.unal.se1_app.dataAccess.callback.AdminListCallback;
+import co.edu.unal.se1_app.dataAccess.config.Config;
 import co.edu.unal.se1_app.dataAccess.interfaces.AdminAPI;
 import co.edu.unal.se1_app.dataAccess.model.Admin;
 import retrofit2.Call;
@@ -20,7 +21,7 @@ public class AdminRepository {
 
     public AdminRepository( ) {
         this.retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.12:8080/api/")
+                .baseUrl(Config.getUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

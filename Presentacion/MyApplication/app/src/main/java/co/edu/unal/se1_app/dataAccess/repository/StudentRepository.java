@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 
 import co.edu.unal.se1_app.dataAccess.callback.StudentCallback;
 import co.edu.unal.se1_app.dataAccess.callback.StudentListCallback;
+import co.edu.unal.se1_app.dataAccess.config.Config;
 import co.edu.unal.se1_app.dataAccess.interfaces.StudentAPI;
 import co.edu.unal.se1_app.dataAccess.model.Student;
 import retrofit2.Call;
@@ -23,7 +24,7 @@ public class StudentRepository {
 
     public StudentRepository( ) {
         this.retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.7:8080/api/")
+                .baseUrl(Config.getUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
