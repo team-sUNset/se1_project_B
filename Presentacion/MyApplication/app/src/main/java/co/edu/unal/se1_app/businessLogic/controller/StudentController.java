@@ -23,7 +23,7 @@ public class StudentController {
 
     }
 
-    public void createStudent(Student student , @Nullable StudentCallback callbacks){
+    public void createStudent( Student student , @Nullable StudentCallback callbacks ){
         studentRepository = new StudentRepository();
         studentRepository.createStudent(student, new StudentCallback() {
             @Override
@@ -38,16 +38,35 @@ public class StudentController {
         });
     }
 
-    public Student getStudentById(Long id){
+    public void getStudentById( Long id , @Nullable StudentCallback callbacks ){
         studentRepository = new StudentRepository();
-        return studentRepository.getStudentById( id );
+        studentRepository.getStudentById(id, new StudentCallback() {
+            @Override
+            public void onSuccess(@NonNull Student student) {
+                callbacks.onSuccess( student );
+            }
+
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+                callbacks.onError( throwable );
+            }
+        });
     }
 
-    public boolean verifyStudent( Long id , String password ){
+    public void verifyStudent( Long id , String password , @Nullable StudentCallback callbacks ){
         studentRepository = new StudentRepository();
-        Student student = studentRepository.getStudentById( id );
-        if( student == null ) return false;
-        return password.equals( student.getPassword() );
+        studentRepository.getStudentById(id, new StudentCallback() {
+            @Override
+            public void onSuccess(@NonNull Student student) {
+                if( password.equals( student.getPassword() ) ) callbacks.onSuccess( student );
+                else callbacks.onSuccess( null );
+            }
+
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+                callbacks.onError( throwable );
+            }
+        });
     }
 
 }

@@ -1,5 +1,10 @@
 package co.edu.unal.se1_app.businessLogic.controller;
 
+import androidx.annotation.NonNull;
+
+import javax.annotation.Nullable;
+
+import co.edu.unal.se1_app.dataAccess.callback.EquipmentCallback;
 import co.edu.unal.se1_app.dataAccess.model.Equipment;
 import co.edu.unal.se1_app.dataAccess.repository.EquipmentRepository;
 
@@ -11,27 +16,73 @@ public class EquipmentController {
 
     }
 
-    public Equipment createEquipment(Equipment equipment){
+    public void createEquipment( Equipment equipment , @Nullable EquipmentCallback callbacks ){
         equipmentRepository = new EquipmentRepository();
-        return equipmentRepository.createEquipment( equipment );
+        equipmentRepository.createEquipment(equipment, new EquipmentCallback() {
+            @Override
+            public void onSuccess(@NonNull Equipment equipment) {
+                callbacks.onSuccess( equipment );
+            }
+
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+                callbacks.onError( throwable );
+            }
+        });
     }
 
-    public boolean reduceStock(Long id){
+    public void reduceStock( Long id , @Nullable EquipmentCallback callbacks ){
         equipmentRepository = new EquipmentRepository();
-        Equipment equipment = equipmentRepository.getEquipmentById( id );
-        if( equipment == null || equipment.getStock() <= 0 ) return false;
-        equipment.setStock( equipment.getStock() - 1 );
-        equipmentRepository.updateEquipment( id , equipment );
-        return true;
+        equipmentRepository.getEquipmentById(id, new EquipmentCallback() {
+            @Override
+            public void onSuccess(@NonNull Equipment equipment) {
+                if( equipment == null || equipment.getStock() <= 0 ) callbacks.onSuccess( null );
+                equipment.setStock( equipment.getStock() - 1 );
+                equipmentRepository.updateEquipment( id, equipment, new EquipmentCallback() {
+                    @Override
+                    public void onSuccess(@NonNull Equipment updated) {
+                        callbacks.onSuccess( updated );
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable throwable) {
+                        callbacks.onError( throwable );
+                    }
+                });
+            }
+
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+                callbacks.onError( throwable );
+            }
+        });
     }
 
-    public boolean addStock(Long id){
+    public void addStock( Long id , @Nullable EquipmentCallback callbacks ){
         equipmentRepository = new EquipmentRepository();
-        Equipment equipment = equipmentRepository.getEquipmentById( id );
-        if( equipment == null ) return false;
-        equipment.setStock( equipment.getStock() - 1 );
-        equipmentRepository.updateEquipment( id , equipment );
-        return true;
+        equipmentRepository.getEquipmentById(id, new EquipmentCallback() {
+            @Override
+            public void onSuccess(@NonNull Equipment equipment) {
+                if( equipment == null ) callbacks.onSuccess( null );
+                equipment.setStock( equipment.getStock() + 1 );
+                equipmentRepository.updateEquipment( id, equipment, new EquipmentCallback() {
+                    @Override
+                    public void onSuccess(@NonNull Equipment updated) {
+                        callbacks.onSuccess( updated );
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable throwable) {
+                        callbacks.onError( throwable );
+                    }
+                });
+            }
+
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+                callbacks.onError( throwable );
+            }
+        });
     }
 
 }
