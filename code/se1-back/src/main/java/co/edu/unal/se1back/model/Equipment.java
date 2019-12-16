@@ -20,7 +20,7 @@ public class Equipment {
     private String name;
 
     @NotBlank
-    private int officeID;
+    private Long officeID;
 
     @NotBlank
     private int stock;
@@ -41,11 +41,11 @@ public class Equipment {
         this.name = name;
     }
 
-    public int getOfficeID() {
+    public Long getOfficeID() {
         return officeID;
     }
 
-    public void setOfficeID(int officeID) {
+    public void setOfficeID(Long officeID) {
         this.officeID = officeID;
     }
 
