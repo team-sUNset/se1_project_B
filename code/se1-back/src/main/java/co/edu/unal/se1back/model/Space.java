@@ -19,9 +19,6 @@ public class Space {
     @NotBlank
     private String name;
 
-    @NotBlank
-    private boolean available;
-
     public Long getId() {
         return id;
     }
@@ -38,11 +35,4 @@ public class Space {
         this.name = name;
     }
 
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
 }

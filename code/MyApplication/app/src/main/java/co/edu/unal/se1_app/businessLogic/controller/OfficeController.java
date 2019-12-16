@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 
 import co.edu.unal.se1_app.dataAccess.callback.EquipmentListCallback;
 import co.edu.unal.se1_app.dataAccess.callback.OfficeCallback;
+import co.edu.unal.se1_app.dataAccess.callback.OfficeListCallback;
 import co.edu.unal.se1_app.dataAccess.model.Equipment;
 import co.edu.unal.se1_app.dataAccess.model.Office;
 import co.edu.unal.se1_app.dataAccess.repository.EquipmentRepository;
@@ -28,6 +29,21 @@ public class OfficeController {
             @Override
             public void onSuccess(@NonNull Office office) {
                 callbacks.onSuccess( office );
+            }
+
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+                callbacks.onError( throwable );
+            }
+        });
+    }
+
+    public void getOffices (@Nullable OfficeListCallback callbacks ){
+        officeRepository = new OfficeRepository();
+        officeRepository.getOffices(new OfficeListCallback() {
+            @Override
+            public void onSuccess(@NonNull List<Office> offices) {
+                callbacks.onSuccess( offices );
             }
 
             @Override
@@ -67,4 +83,10 @@ public class OfficeController {
             }
         });
     }
+
+    public void deleteOffice( Long id ){
+        officeRepository = new OfficeRepository();
+        officeRepository.deleteOffice( id );
+    }
+
 }

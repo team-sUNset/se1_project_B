@@ -69,4 +69,9 @@ public class StudentController {
         });
     }
 
+    public void deleteStudent( Long id ){
+        studentRepository = new StudentRepository();
+        studentRepository.deleteStudent( id );
+    }
+
 }

@@ -5,11 +5,8 @@ public class Space {
 
     private String name;
 
-    private boolean available;
-
     public Space(String name, boolean available) {
         this.name = name;
-        this.available = available;
     }
 
     public Long getId() {
@@ -28,11 +25,4 @@ public class Space {
         this.name = name;
     }
 
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
 }

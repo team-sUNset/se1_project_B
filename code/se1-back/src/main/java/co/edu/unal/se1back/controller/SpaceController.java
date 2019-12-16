@@ -42,7 +42,6 @@ public class SpaceController {
                 .orElseThrow(() -> new ResourceNotFoundException("Space", "id", spaceId));
 
         space.setName(spaceDetails.getName());
-        space.setAvailable(spaceDetails.isAvailable());
         Space updatedSpace = spaceRepository.save(space);
         return updatedSpace;
     }
