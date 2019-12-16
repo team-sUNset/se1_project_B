@@ -11,12 +11,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import co.edu.unal.se1_app.R;
+import co.edu.unal.se1_app.businessLogic.controller.SpaceController;
+import co.edu.unal.se1_app.dataAccess.callback.AdminCallback;
+import co.edu.unal.se1_app.dataAccess.callback.SpaceCallback;
+import co.edu.unal.se1_app.dataAccess.model.Admin;
+import co.edu.unal.se1_app.dataAccess.model.Space;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -35,14 +42,36 @@ public class createSpaceFragment extends Fragment {
         imagen = (ImageButton) root.findViewById(R.id.imageButton);
         Button boton= (Button) root.findViewById(R.id.crearSpace);
         final EditText nameSpace= (EditText) root.findViewById(R.id.createSpace1);
-        final EditText idSpace=  (EditText) root.findViewById(R.id.createSpace2);
+
         boton.setOnClickListener(
                 new View.OnClickListener()
                 {
                     public void onClick(View view)
                     {
                         String name= nameSpace.getText().toString();
-                        String id= idSpace.getText().toString();
+
+
+                        Space space= new Space(name,true);
+                        SpaceController spaceController= new SpaceController();
+                        spaceController.createSpace(space,new SpaceCallback() {
+                            @Override
+                            public void onSuccess(@NonNull Space space) {
+                                //System.out.println( "ID " + student.getId() );
+                                Toast toast1 =
+                                        Toast.makeText(getActivity().getApplicationContext(),
+                                                "Espacio Creado " , Toast.LENGTH_SHORT);
+                                toast1.show();
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable throwable) {
+                                Toast toast1 =
+                                        Toast.makeText(getActivity().getApplicationContext(),
+                                                "Error" , Toast.LENGTH_SHORT);
+                                toast1.show();
+                            }
+                        });
+
                         System.out.println(name);
 
                     }

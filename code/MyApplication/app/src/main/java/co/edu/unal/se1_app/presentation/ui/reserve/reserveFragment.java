@@ -96,8 +96,8 @@ public class reserveFragment extends Fragment {
                 {
                     public void onClick(View view)
                     {
-                        String startDateTime= startD.getText().toString()+startT.getText().toString();
-                        String endDateTime= endD.getText().toString()+endT.getText().toString();
+                        String startDateTime= startD.getText().toString()+" "+startT.getText().toString();
+                        String endDateTime= endD.getText().toString()+" "+endT.getText().toString();
                         Long elem= Long.parseLong("6");
 
                         ReserveController reserveController = new ReserveController();

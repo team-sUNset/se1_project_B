@@ -18,15 +18,15 @@
         tools:layout="@layout/fragment_create_admin" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="co.edu.unal.se1_app.presentation.ui.slideshow.SlideshowFragment"
-        android:label="Editar Inventario"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/user_list"
+        android:name="co.edu.unal.se1_app.presentation.ui.user_list.userListFragment"
+        android:label="Lista Usuarios"
+        tools:layout="@layout/fragment_user_list" />
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="co.edu.unal.se1_app.presentation.ui.tools.ToolsFragment"
-        android:label="Lista Oficinas"
+        android:name="co.edu.unal.se1_app.presentation.ui.user_list.userListFragment"
+        android:label="Lista Usuarios"
         tools:layout="@layout/fragment_tools" />
 
     <fragment
