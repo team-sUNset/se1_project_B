@@ -16,7 +16,9 @@
         <activity
             android:name=".presentation.MainMenuAdmin"
             android:label="@string/title_activity_main_menu_admin"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity
             android:name=".presentation.MainActivity"
             android:label="@string/app_name"
@@ -26,6 +28,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
 
 
         </activity>

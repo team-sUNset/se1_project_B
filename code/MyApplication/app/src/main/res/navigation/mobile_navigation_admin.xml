@@ -7,31 +7,31 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.myapplication.ui.delete.deleteFragment"
+        android:name="co.edu.unal.se1_app.presentation.ui.delete.deleteFragment"
         android:label="Eliminar"
         tools:layout="@layout/fragment_delete" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.myapplication.ui.creAdmin.createAdmin"
+        android:name="co.edu.unal.se1_app.presentation.ui.creAdmin.createAdmin"
         android:label="Create"
         tools:layout="@layout/fragment_create_admin" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.myapplication.ui.slideshow.SlideshowFragment"
+        android:name="co.edu.unal.se1_app.presentation.ui.slideshow.SlideshowFragment"
         android:label="Editar Inventario"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="com.example.myapplication.ui.tools.ToolsFragment"
+        android:name="co.edu.unal.se1_app.presentation.ui.tools.ToolsFragment"
         android:label="Lista Oficinas"
         tools:layout="@layout/fragment_tools" />
 
     <fragment
         android:id="@+id/nav_share"
-        android:name="com.example.myapplication.ui.share.ShareFragment"
+        android:name="co.edu.unal.se1_app.presentation.ui.share.ShareFragment"
         android:label="Lista Loans"
         tools:layout="@layout/fragment_share" />
 
