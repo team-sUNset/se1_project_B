@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d5bc0eb-6c3d-4cb6-8dba-ddeafcba382f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/unal/se1back/model/Equipment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/unal/se1back/model/Equipment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,7 +45,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
