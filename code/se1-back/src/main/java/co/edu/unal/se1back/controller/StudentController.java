@@ -44,7 +44,7 @@ public class StudentController {
                 .orElseThrow(() -> new ResourceNotFoundException("Student", "id", studentId));
 
         student.setPassword(studentDetails.getPassword());
-        student.setFirstName(studentDetails.getFirstName());
+        student.setFirstName(studentDetails.getEmail());
         student.setLastName(studentDetails.getLastName());
         student.setEmail(studentDetails.getEmail());
         Student updatedStudent = studentRepository.save(student);
