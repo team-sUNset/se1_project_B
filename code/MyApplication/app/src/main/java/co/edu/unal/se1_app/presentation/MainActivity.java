@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
                        usuario = Long.parseLong(text_user.getText().toString());
                        String password= text_pass.getText().toString();
 
-                       open_test(view);
-                       /*
+                       //open_test(view);
+
                         StudentController studentController = new StudentController();
                         studentController.verifyStudent(usuario, password,new StudentCallback() {
                             @Override
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                         });
-                        */
+
                     }
                 });
 
