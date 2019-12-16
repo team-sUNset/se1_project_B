@@ -1,4 +1,4 @@
-package co.edu.unal.se1_app.presentation.ui.office;
+package co.edu.unal.se1_app.presentation.ui.inventary;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -10,19 +10,19 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+
 import co.edu.unal.se1_app.R;
 import co.edu.unal.se1_app.presentation.ui.history.Category;
 
-import java.util.ArrayList;
-
-public class officeFragment extends Fragment {
+public class inventaryFragment extends Fragment {
 
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_office, container, false);
+        View root = inflater.inflate(R.layout.fragment_inventary, container, false);
         Drawable dr= getResources().getDrawable(R.drawable.balon);
         ArrayList<Category> category = new ArrayList<Category>();
 
@@ -32,7 +32,7 @@ public class officeFragment extends Fragment {
         category.add(cat1);
         category.add(cat2);
 
-        AdapterItemOffice adapter = new AdapterItemOffice(this.getActivity(), category);
+        AdapterItemInventary adapter = new AdapterItemInventary(this.getActivity(), category);
 
         lv.setAdapter(adapter);
 

@@ -11,12 +11,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import co.edu.unal.se1_app.R;
+import co.edu.unal.se1_app.businessLogic.controller.OfficeController;
+import co.edu.unal.se1_app.dataAccess.callback.OfficeCallback;
+import co.edu.unal.se1_app.dataAccess.model.Office;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -44,6 +48,25 @@ public class createOfficeFragment extends Fragment {
                         String name= nameOffice.getText().toString();
                         String id= idOffice.getText().toString();
                         System.out.println(name);
+                        OfficeController officeController = new OfficeController();
+                        Office newOffice = new Office(name);
+                        officeController.createOffice(newOffice, new OfficeCallback() {
+                            @Override
+                            public void onSuccess(@NonNull Office office) {
+                                System.out.println("ID "+office.getId());
+                                Toast toast1 =
+                                        Toast.makeText(getActivity().getApplicationContext(),
+                                                "Ofcina: " + office.getId().toString(), Toast.LENGTH_SHORT);
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable throwable) {
+                                Toast toast1 =
+                                        Toast.makeText(getActivity().getApplicationContext(),
+                                                "Error", Toast.LENGTH_SHORT);
+                                toast1.show();
+                            }
+                        });
 
                     }
                 });

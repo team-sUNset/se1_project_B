@@ -7,31 +7,37 @@
 
     <fragment
         android:id="@+id/reserve"
-        android:name="com.example.myapplication.ui.reserve.reserveFragment"
+        android:name="co.edu.unal.se1_app.presentation.ui.reserve.reserveFragment"
         android:label="Reservar"
         tools:layout="@layout/fragment_office" />
 
     <fragment
         android:id="@+id/offices"
-        android:name="com.example.myapplication.ui.office.officeFragment"
+        android:name="co.edu.unal.se1_app.presentation.ui.office.officeFragment"
+        android:label="Oficinas"
+        tools:layout="@layout/fragment_office" />
+
+    <fragment
+        android:id="@+id/inventary"
+        android:name="co.edu.unal.se1_app.presentation.ui.inventary.inventaryFragment"
         android:label="Oficinas"
         tools:layout="@layout/fragment_office" />
 
     <fragment
         android:id="@+id/history"
-        android:name="com.example.myapplication.ui.history.historyFragment"
+        android:name="co.edu.unal.se1_app.presentation.ui.history.historyFragment"
         android:label="Mi Historia"
         tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/active"
-        android:name="com.example.myapplication.ui.active.activeFragment"
+        android:name="co.edu.unal.se1_app.presentation.ui.active.activeFragment"
         android:label="Prestamos Activos"
         tools:layout="@layout/fragment_active" />
 
     <fragment
         android:id="@+id/desactive"
-        android:name="com.example.myapplication.ui.cancel.cancelFragment"
+        android:name="co.edu.unal.se1_app.presentation.ui.cancel.cancelFragment"
         android:label="Cancelar Prestamo"
         tools:layout="@layout/fragment_cancel" />
 </navigation>

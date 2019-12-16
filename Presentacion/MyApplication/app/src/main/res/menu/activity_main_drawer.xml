@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="Oficinas" />
         <item
+            android:id="@+id/inventary"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Inventario" />
+        <item
             android:id="@+id/history"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Mi historia" />
