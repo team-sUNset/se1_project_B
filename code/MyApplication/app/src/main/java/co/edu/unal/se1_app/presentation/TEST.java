@@ -6,74 +6,75 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import co.edu.unal.se1_app.R;
+import co.edu.unal.se1_app.businessLogic.controller.AdminController;
+import co.edu.unal.se1_app.dataAccess.callback.AdminCallback;
+import co.edu.unal.se1_app.dataAccess.model.Admin;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class TEST extends AppCompatActivity {
 
-    private Spinner offices;
-    private Spinner implementos;
+    int num=0;
+    TextView numero;
 
 
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_reserve);
-        offices= (Spinner)findViewById(R.id.spinner_offices);
-        implementos =(Spinner)findViewById(R.id.spinner_implements);
-        ArrayList<String> elementos= new ArrayList<String>();
-        elementos.add("El 1");
-        elementos.add("El 2");
-        elementos.add("El 3");
-        elementos.add("El 4");
-        ArrayList<String> oficinas= new ArrayList<String>();
-        oficinas.add("Office 1");
-        oficinas.add("Office 2");
-        oficinas.add("Office 3");
-        oficinas.add("Office 4");
-        ArrayAdapter adp = new ArrayAdapter(this ,android.R.layout.simple_spinner_item,oficinas);
-        adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        offices.setAdapter(adp);
-        offices.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String elemento= (String) offices.getAdapter().getItem(position);
-                Toast.makeText(TEST.this ,"Seleccionaste Oficina"+ elemento,Toast.LENGTH_SHORT).show();
-            }
+        setContentView(R.layout.test);
+        //reset(this.findViewById(android.R.id.content));
+        numero= (TextView) findViewById(R.id.textView6);
+        Button menos= (Button ) findViewById(R.id.button2);
+        Button mas= (Button) findViewById(R.id.button5);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+        mas.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                        countUP(view);
 
-            }
-        });
-        ArrayAdapter adp2 = new ArrayAdapter(TEST.this ,android.R.layout.simple_spinner_item,elementos);
-        adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        implementos.setAdapter(adp2);
-        implementos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String elemento= (String) implementos.getAdapter().getItem(position);
-                Toast.makeText(TEST.this ,"Seleccionaste"+ elemento,Toast.LENGTH_SHORT).show();
-            }
+                    }
+                });
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+        menos.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                       countDOWN(view);
+                    }
+                });
 
-            }
-        });
-
-        Long user = MainActivity.main_user();
-        //System.out.println(user);
 
 
     }
+
+    public void countUP (View view){
+        num++;
+        numero.setText(Integer.toString(num));
+    }
+
+    public void countDOWN (View view){
+        num--;
+        numero.setText(Integer.toString(num));
+    }
+
+    public void reset (View view){
+        num=0;
+        numero.setText(Integer.toString(num));
+    }
+
 }
