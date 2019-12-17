@@ -65,7 +65,7 @@
         android:layout_width="298dp"
         android:layout_height="38dp"
         android:ems="10"
-        android:hint="@string/Usuario"
+        android:hint="ID"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

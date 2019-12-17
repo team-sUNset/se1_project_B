@@ -25,7 +25,7 @@
     <fragment
         android:id="@+id/reserve_list"
         android:name="co.edu.unal.se1_app.presentation.ui.reserve.reserveListFragment"
-        android:label="Lista Usuarios"
+
         tools:layout="@layout/fragment_reserve_list" />
 
     <fragment

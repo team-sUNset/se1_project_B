@@ -65,7 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:text="Dia Comienzo(yyyy/MM/dd)" />
+        android:text="Dia Comienzo(DD/MM/YYYY)" />
 
     <EditText
         android:id="@+id/dayStart"
@@ -85,7 +85,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:text="Hora Comienzo(HH:mm:ss)" />
+        android:text="Hora Comienzo(HH:MM)" />
 
     <EditText
         android:id="@+id/timeStart"
