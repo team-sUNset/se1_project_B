@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="co.edu.unal.se1_app.presentation.ui.delete.deleteFragment"
+        android:label="Eliminar"
+        tools:layout="@layout/fragment_delete" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="co.edu.unal.se1_app.presentation.ui.creAdmin.createAdmin"
+        android:label="Create"
+        tools:layout="@layout/fragment_create_admin" />
+
+    <fragment
+        android:id="@+id/user_list"
+        android:name="co.edu.unal.se1_app.presentation.ui.user_list.userListFragment"
+        android:label="Lista Usuarios"
+        tools:layout="@layout/fragment_user_list" />
+    <fragment
+        android:id="@+id/reserve_list"
+        android:name="co.edu.unal.se1_app.presentation.ui.reserve.reserveListFragment"
+
+        tools:layout="@layout/fragment_reserve_list" />
+
+    <fragment
+        android:id="@+id/nav_tools"
+        android:name="co.edu.unal.se1_app.presentation.ui.cancel.cancelAdminFragment"
+        android:label="Cancelar Prestamo"
+        tools:layout="@layout/fragment_cancel_admin" />
+
+    <fragment
+        android:id="@+id/nav_share"
+        android:name="co.edu.unal.se1_app.presentation.ui.edit.editInventaryFragment"
+        android:label="Editar Inventario"
+        tools:layout="@layout/fragment_edit_inventary" />
+
+
+</navigation>
