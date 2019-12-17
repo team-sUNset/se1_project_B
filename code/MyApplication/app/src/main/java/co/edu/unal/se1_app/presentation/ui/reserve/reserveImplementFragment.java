@@ -15,25 +15,21 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import co.edu.unal.se1_app.R;
-import co.edu.unal.se1_app.businessLogic.controller.AdminController;
 import co.edu.unal.se1_app.businessLogic.controller.EquipmentController;
 import co.edu.unal.se1_app.businessLogic.controller.OfficeController;
 import co.edu.unal.se1_app.businessLogic.controller.ReserveController;
-import co.edu.unal.se1_app.dataAccess.callback.AdminCallback;
 import co.edu.unal.se1_app.dataAccess.callback.EquipmentListCallback;
 import co.edu.unal.se1_app.dataAccess.callback.OfficeListCallback;
 import co.edu.unal.se1_app.dataAccess.callback.ReserveCallback;
-import co.edu.unal.se1_app.dataAccess.model.Admin;
 import co.edu.unal.se1_app.dataAccess.model.Equipment;
 import co.edu.unal.se1_app.dataAccess.model.Office;
 import co.edu.unal.se1_app.dataAccess.model.Reserve;
 import co.edu.unal.se1_app.presentation.MainActivity;
-import co.edu.unal.se1_app.presentation.MainMenuUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class reserveFragment extends Fragment {
+public class reserveImplementFragment extends Fragment {
 
     private Spinner s_offices;
     private Spinner s_implementos;
@@ -42,7 +38,7 @@ public class reserveFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_reserve, container, false);
+        View root = inflater.inflate(R.layout.fragment_reserve_implement, container, false);
         s_offices = (Spinner)root.findViewById(R.id.spinner_offices);
         s_implementos =(Spinner)root.findViewById(R.id.spinner_implements);
 
@@ -126,11 +122,12 @@ public class reserveFragment extends Fragment {
                 {
                     public void onClick(View view)
                     {
-
-                        Toast toast1 =
-                                Toast.makeText(getActivity().getApplicationContext(),
-                                        "Seleccione Oficina e Implemento" , Toast.LENGTH_SHORT);
-                        toast1.show();
+                        if( eqID == null ) {
+                            Toast toast1 =
+                                    Toast.makeText(getActivity().getApplicationContext(),
+                                            "Seleccione Oficina e Implemento", Toast.LENGTH_SHORT);
+                            toast1.show();
+                        }
 
                         String startDateTime= startD.getText().toString()+" "+startT.getText().toString();
 
@@ -150,7 +147,7 @@ public class reserveFragment extends Fragment {
                             public void onError(@NonNull Throwable throwable) {
                                 Toast toast1 =
                                         Toast.makeText(getActivity().getApplicationContext(),
-                                                "Error: No se puede crear reserva" , Toast.LENGTH_SHORT);
+                                                "Error: No se puede crear reserva\n" + throwable.getMessage() , Toast.LENGTH_SHORT);
                                 toast1.show();
                             }
                         });

@@ -7,9 +7,15 @@
 
     <fragment
         android:id="@+id/reserve"
-        android:name="co.edu.unal.se1_app.presentation.ui.reserve.reserveFragment"
+        android:name="co.edu.unal.se1_app.presentation.ui.reserve.reserveImplementFragment"
         android:label="Reservar"
         tools:layout="@layout/fragment_office" />
+
+    <fragment
+        android:id="@+id/reserve_space"
+        android:name="co.edu.unal.se1_app.presentation.ui.reserve.reserveSpaceFragment"
+
+        tools:layout="@layout/fragment_reserve_space" />
 
     <fragment
         android:id="@+id/offices"

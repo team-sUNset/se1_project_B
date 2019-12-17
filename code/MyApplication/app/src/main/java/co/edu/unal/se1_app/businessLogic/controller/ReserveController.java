@@ -39,6 +39,7 @@ public class ReserveController {
         /// Type 1 = Space
         if( !validDateTime( reserve.getStartDateTime() ) ){
             callbacks.onError( new Exception( "Invalid DateTime" ) );
+            return;
         }
         if( reserve.isType() == false ){
             studentRepository.getStudentById(reserve.getStudentId(), new StudentCallback() {
@@ -51,9 +52,10 @@ public class ReserveController {
                                     reserve.getStartDateTime(), new IntegerCallback() {
                                         @Override
                                         public void onSuccess(@NonNull Integer integer) {
+                                            System.out.println("----------------------------------------------------------- COUNT = " + integer.intValue());
                                             if (integer.intValue() >= equipment.getStock() ) {
                                                 callbacks.onError(new Exception("Not enough stock"));
-                                            }else {
+                                            }else{
                                                 reserveRepository.createReserve(reserve, new ReserveCallback() {
                                                     @Override
                                                     public void onSuccess(@NonNull Reserve created) {
@@ -119,7 +121,7 @@ public class ReserveController {
 
                                         @Override
                                         public void onError(@NonNull Throwable throwable) {
-
+                                            callbacks.onError(throwable);
                                         }
                                     });
                         }
@@ -141,7 +143,7 @@ public class ReserveController {
 
     private boolean validDateTime( String date ){
         // Format DD/MM/YYYY HH:MM
-        if( date.length() != 10 ) return false;
+        if( date.length() != 16 ) return false;
         if( !Character.isDigit( date.charAt(0) ) ) return false;
         if( !Character.isDigit( date.charAt(1) ) ) return false;
         if( date.charAt(2) != '/' ) return false;
@@ -175,7 +177,7 @@ public class ReserveController {
             public void onSuccess(@NonNull List<Reserve> reserves) {
                 int count = 0;
                 for( Reserve r : reserves ){
-                    if( r.isType() == type && id.equals( r.getId() ) && date.equals( r.getStartDateTime() ) )
+                    if( r.isType() == type && id.equals( r.getElementId() ) && date.equals( r.getStartDateTime() ) )
                         count ++;
                 }
                 callbacks.onSuccess( Integer.valueOf( count ) );

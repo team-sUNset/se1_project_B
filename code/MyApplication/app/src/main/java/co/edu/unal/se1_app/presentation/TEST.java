@@ -1,21 +1,16 @@
 package co.edu.unal.se1_app.presentation;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import co.edu.unal.se1_app.R;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class TEST extends AppCompatActivity {
@@ -27,7 +22,7 @@ public class TEST extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_reserve);
+        setContentView(R.layout.fragment_reserve_implement);
         offices= (Spinner)findViewById(R.id.spinner_offices);
         implementos =(Spinner)findViewById(R.id.spinner_implements);
         ArrayList<String> elementos= new ArrayList<String>();

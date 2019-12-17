@@ -7,7 +7,12 @@
         <item
             android:id="@+id/reserve"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Reservar" />
+            android:title="Reservar Implemento" />
+
+        <item
+            android:id="@+id/reserve_space"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Reservar Espacio" />
         <item
             android:id="@+id/offices"
             android:icon="@drawable/ic_menu_gallery"
@@ -20,6 +25,8 @@
             android:id="@+id/history"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Prestamos Activos" />
+
+
 
         <item
             android:id="@+id/desactive"
