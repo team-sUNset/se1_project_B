@@ -39,14 +39,14 @@ public class createOfficeFragment extends Fragment {
         imagen = (ImageButton) root.findViewById(R.id.imageButton2);
         Button boton= (Button) root.findViewById(R.id.crearOffice);
         final EditText nameOffice= (EditText) root.findViewById(R.id.createOffice1);
-        final EditText idOffice=  (EditText) root.findViewById(R.id.createOffice2);
+
         boton.setOnClickListener(
                 new View.OnClickListener()
                 {
                     public void onClick(View view)
                     {
                         String name= nameOffice.getText().toString();
-                        String id= idOffice.getText().toString();
+
                         System.out.println(name);
                         OfficeController officeController = new OfficeController();
                         Office newOffice = new Office(name);

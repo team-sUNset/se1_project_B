@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import co.edu.unal.se1_app.R;
+import co.edu.unal.se1_app.businessLogic.controller.ReserveController;
+import co.edu.unal.se1_app.dataAccess.callback.ReserveCallback;
 
 public class cancelFragment extends Fragment {
 
@@ -26,7 +28,12 @@ public class cancelFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String id = idPrestamo.getText().toString();
+
+                        Long id = Long.parseLong(idPrestamo.getText().toString());
+
+                        ReserveController reserveController= new ReserveController();
+                        reserveController.deleteReserve(id );
+
                     }
                 }
         );

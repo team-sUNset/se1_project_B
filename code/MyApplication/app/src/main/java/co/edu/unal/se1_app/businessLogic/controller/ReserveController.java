@@ -36,7 +36,7 @@ public class ReserveController {
         SpaceRepository spaceRepository = new SpaceRepository();
         /// Type 0 = Equipment
         /// Type 1 = Space
-        if( !validDateTime( reserve.getStartDateTime() ) || !validDateTime( reserve.getEndDateTime() ) ){
+        if( !validDateTime( reserve.getStartDateTime() ) ){
             callbacks.onError( new Exception( "Invalid DateTime" ) );
         }
         if( reserve.isType() == false ){
@@ -188,6 +188,25 @@ public class ReserveController {
     public void deleteReserve( Long id ){
         reserveRepository = new ReserveRepository();
         reserveRepository.deleteReserve( id );
+    }
+
+    public void getReservesByStudentId( Long studnetId , @Nullable ReserveListCallback callbacks ){
+        reserveRepository = new ReserveRepository();
+        reserveRepository.getReserves(new ReserveListCallback() {
+            @Override
+            public void onSuccess(@NonNull List<Reserve> reserves) {
+                List<Reserve> ret = new ArrayList<>();
+                for( Reserve r : reserves ){
+                    if( r.getStudentId().equals( studnetId ) ) ret.add(r);
+                }
+                callbacks.onSuccess( ret );
+            }
+
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+                callbacks.onError( throwable );
+            }
+        });
     }
 
 }

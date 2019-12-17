@@ -49,6 +49,21 @@ public class SpaceController {
         });
     }
 
+    public void getSpaceByID ( Long id , @Nullable SpaceCallback callbacks ){
+        spaceRepository = new SpaceRepository();
+        spaceRepository.getSpaceById(id, new SpaceCallback() {
+            @Override
+            public void onSuccess(@NonNull Space space) {
+                callbacks.onSuccess( space );
+            }
+
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+                callbacks.onError( throwable );
+            }
+        });
+    }
+
     public void deleteSpace( Long id ){
         spaceRepository = new SpaceRepository();
         spaceRepository.deleteSpace( id );

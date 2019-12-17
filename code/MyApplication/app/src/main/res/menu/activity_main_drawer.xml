@@ -19,11 +19,8 @@
         <item
             android:id="@+id/history"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Mi historia" />
-        <item
-            android:id="@+id/active"
-            android:icon="@drawable/ic_menu_manage"
             android:title="Prestamos Activos" />
+
         <item
             android:id="@+id/desactive"
             android:icon="@drawable/ic_menu_manage"

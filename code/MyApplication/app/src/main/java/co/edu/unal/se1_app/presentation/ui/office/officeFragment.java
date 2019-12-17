@@ -11,9 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import co.edu.unal.se1_app.R;
+import co.edu.unal.se1_app.businessLogic.controller.OfficeController;
+import co.edu.unal.se1_app.dataAccess.callback.OfficeListCallback;
+import co.edu.unal.se1_app.dataAccess.model.Office;
 import co.edu.unal.se1_app.presentation.ui.history.Category;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class officeFragment extends Fragment {
 
@@ -23,18 +27,28 @@ public class officeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_office, container, false);
-        Drawable dr= getResources().getDrawable(R.drawable.balon);
-        ArrayList<Category> category = new ArrayList<Category>();
+        Drawable dr= getResources().getDrawable(R.drawable.oficina);
 
-        Category cat1= new Category("id10","prestamo1","genial",dr);
-        Category cat2= new Category("id20","prestamo2","genial",dr);
-        ListView lv = (ListView) root.findViewById(R.id.listView);
-        category.add(cat1);
-        category.add(cat2);
+        OfficeController officeController = new OfficeController();
+        officeController.getOffices(new OfficeListCallback() {
+            @Override
+            public void onSuccess(@NonNull List<Office> offices) {
+                ArrayList<Category> category = new ArrayList<Category>();
+                for( Office of : offices ){
+                    category.add( new Category( of.getId().toString() , of.getName() ,
+                            "id: " + of.getId().toString() , dr ) );
+                }
 
-        AdapterItemOffice adapter = new AdapterItemOffice(this.getActivity(), category);
+                ListView lv = (ListView) root.findViewById(R.id.listView);
+                AdapterItemOffice adapter = new AdapterItemOffice(getActivity(), category);
+                lv.setAdapter(adapter);
+            }
 
-        lv.setAdapter(adapter);
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+                System.out.println("Activity Oficinas: " + throwable.getMessage());
+            }
+        });
 
         return root;
     }

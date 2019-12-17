@@ -16,13 +16,10 @@ public class Reserve {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     private boolean type;
 
-    @NotBlank
     private Long studentId;
 
-    @NotBlank
     private Long elementId;
 
     @NotBlank

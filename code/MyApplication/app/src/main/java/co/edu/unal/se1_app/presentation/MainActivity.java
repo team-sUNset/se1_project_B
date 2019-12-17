@@ -103,14 +103,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-
-
-
-
     }
 
     public static Long main_user(){
-
         return usuario;
     }
 

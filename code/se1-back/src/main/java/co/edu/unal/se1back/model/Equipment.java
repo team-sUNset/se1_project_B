@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by riperezro on 24/11/19.
@@ -19,10 +20,8 @@ public class Equipment {
     @NotBlank
     private String name;
 
-    @NotBlank
     private Long officeID;
 
-    @NotBlank
     private int stock;
 
     public Long getId() {

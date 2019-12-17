@@ -26,14 +26,10 @@
     <fragment
         android:id="@+id/history"
         android:name="co.edu.unal.se1_app.presentation.ui.history.historyFragment"
-        android:label="Mi Historia"
+        android:label="Prestamos Activos"
         tools:layout="@layout/fragment_history" />
 
-    <fragment
-        android:id="@+id/active"
-        android:name="co.edu.unal.se1_app.presentation.ui.active.activeFragment"
-        android:label="Prestamos Activos"
-        tools:layout="@layout/fragment_active" />
+
 
     <fragment
         android:id="@+id/desactive"
