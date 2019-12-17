@@ -10,6 +10,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import co.edu.unal.se1_app.dataAccess.callback.StudentCallback;
+import co.edu.unal.se1_app.dataAccess.callback.StudentListCallback;
 import co.edu.unal.se1_app.dataAccess.model.Student;
 import co.edu.unal.se1_app.dataAccess.repository.StudentRepository;
 
@@ -60,6 +61,21 @@ public class StudentController {
             public void onSuccess(@NonNull Student student) {
                 if( password.equals( student.getPassword() ) ) callbacks.onSuccess( student );
                 else callbacks.onSuccess( null );
+            }
+
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+                callbacks.onError( throwable );
+            }
+        });
+    }
+
+    public void getStudents( @Nullable StudentListCallback callbacks ){
+        StudentRepository studentRepository = new StudentRepository();
+        studentRepository.getStudents(new StudentListCallback() {
+            @Override
+            public void onSuccess(@NonNull List<Student> students) {
+                callbacks.onSuccess( students );
             }
 
             @Override

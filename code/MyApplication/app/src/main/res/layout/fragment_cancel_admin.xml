@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainMenuAdmin">
+    tools:context=".presentation.MainMenuUser">
 
     <TextView
         android:id="@+id/textView9"
@@ -48,43 +48,46 @@
         app:layout_constraintVertical_bias="0.871"
         app:srcCompat="@drawable/un_logo" />
 
-    <Button
-        android:id="@+id/c_space"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#F44336"
-        android:text="Espacio"
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="298dp"
+        android:layout_height="38dp"
+        android:ems="10"
+        android:hint="ID de prestamo"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.327" />
+        app:layout_constraintVertical_bias="0.321" />
 
     <Button
-        android:id="@+id/c_implement"
+        android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#F44336"
-        android:text="Implemento"
+        android:text="CONFIRMAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.177" />
+        app:layout_constraintVertical_bias="0.571" />
 
-    <Button
-        android:id="@+id/c_office"
+    <TextView
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#F44336"
-        android:text="oficina"
+        android:text="CANCELAR PRESTAMO"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FF5722"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.114" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

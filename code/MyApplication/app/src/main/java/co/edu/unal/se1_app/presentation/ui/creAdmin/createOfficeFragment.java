@@ -57,6 +57,7 @@ public class createOfficeFragment extends Fragment {
                                 Toast toast1 =
                                         Toast.makeText(getActivity().getApplicationContext(),
                                                 "Ofcina: " + office.getId().toString(), Toast.LENGTH_SHORT);
+                                toast1.show();
                             }
 
                             @Override

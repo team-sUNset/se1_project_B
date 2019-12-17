@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -30,6 +31,10 @@ public class deleteSpaceFragment extends Fragment {
                         Long  space= Long.parseLong(idOffice.getText().toString());
                         SpaceController spaceController= new SpaceController();
                         spaceController.deleteSpace(space);
+                        Toast toast1 =
+                                Toast.makeText(getActivity().getApplicationContext(),
+                                        "Espacio Eliminado" , Toast.LENGTH_SHORT);
+                        toast1.show();
                         System.out.println(space);
 
                     }

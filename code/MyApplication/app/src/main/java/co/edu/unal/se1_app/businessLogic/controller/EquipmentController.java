@@ -103,6 +103,33 @@ public class EquipmentController {
         });
     }
 
+    public void setStock( Long id , int newStock , @Nullable EquipmentCallback callbacks ){
+        equipmentRepository = new EquipmentRepository();
+        equipmentRepository.getEquipmentById(id, new EquipmentCallback() {
+            @Override
+            public void onSuccess(@NonNull Equipment equipment) {
+                if( equipment == null ) callbacks.onSuccess( null );
+                equipment.setStock( newStock );
+                equipmentRepository.updateEquipment( id, equipment, new EquipmentCallback() {
+                    @Override
+                    public void onSuccess(@NonNull Equipment updated) {
+                        callbacks.onSuccess( updated );
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable throwable) {
+                        callbacks.onError( throwable );
+                    }
+                });
+            }
+
+            @Override
+            public void onError(@NonNull Throwable throwable) {
+                callbacks.onError( throwable );
+            }
+        });
+    }
+
     public void getEquipment( @Nullable EquipmentListCallback callbacks ){
         equipmentRepository = new EquipmentRepository();
         equipmentRepository.getEquipment(new EquipmentListCallback() {
@@ -116,6 +143,11 @@ public class EquipmentController {
                 callbacks.onError( throwable );
             }
         });
+    }
+
+    public void deleteEquipment ( Long id ){
+        equipmentRepository = new EquipmentRepository();
+        equipmentRepository.deleteEquipment( id );
     }
 
 }

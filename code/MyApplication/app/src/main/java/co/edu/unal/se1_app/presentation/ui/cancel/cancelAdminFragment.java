@@ -13,16 +13,15 @@ import androidx.fragment.app.Fragment;
 
 import co.edu.unal.se1_app.R;
 import co.edu.unal.se1_app.businessLogic.controller.ReserveController;
-import co.edu.unal.se1_app.dataAccess.callback.ReserveCallback;
 
-public class cancelFragment extends Fragment {
+public class cancelAdminFragment extends Fragment {
 
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_cancel, container, false);
+        View root = inflater.inflate(R.layout.fragment_cancel_admin, container, false);
         final EditText idPrestamo = (EditText) root.findViewById(R.id.editText3);
         Button confirm = (Button) root.findViewById(R.id.button7);
         confirm.setOnClickListener(

@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Texto Frase"
+        android:text=""
         android:id="@+id/texto"
         android:layout_below="@+id/category"
         android:layout_toRightOf="@+id/imageView4"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Titulo Frase"
+        android:text="No hay oficinas"
         android:id="@+id/category"
         android:textSize="21sp"
         android:textColor="#f65034"

@@ -53,6 +53,7 @@ public class historyFragment extends Fragment {
                             public void onSuccess(@NonNull List<Equipment> equipment) {
                                 ArrayList<Category> category = new ArrayList<Category>();
                                 for( Reserve rv : reserves ){
+                                    if( !rv.getStudentId().equals( MainActivity.main_user() ) ) continue;
                                     if( rv.isType() == false ){
                                         for( Equipment eq : equipment ){
                                             if( !eq.getId().equals( rv.getElementId() ) ) continue;

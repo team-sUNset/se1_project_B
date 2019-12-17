@@ -22,18 +22,23 @@
         android:name="co.edu.unal.se1_app.presentation.ui.user_list.userListFragment"
         android:label="Lista Usuarios"
         tools:layout="@layout/fragment_user_list" />
+    <fragment
+        android:id="@+id/reserve_list"
+        android:name="co.edu.unal.se1_app.presentation.ui.reserve.reserveListFragment"
+        android:label="Lista Usuarios"
+        tools:layout="@layout/fragment_reserve_list" />
 
     <fragment
         android:id="@+id/nav_tools"
-        android:name="co.edu.unal.se1_app.presentation.ui.user_list.userListFragment"
-        android:label="Lista Usuarios"
-        tools:layout="@layout/fragment_tools" />
+        android:name="co.edu.unal.se1_app.presentation.ui.cancel.cancelAdminFragment"
+        android:label="Cancelar Prestamo"
+        tools:layout="@layout/fragment_cancel_admin" />
 
     <fragment
         android:id="@+id/nav_share"
-        android:name="co.edu.unal.se1_app.presentation.ui.share.ShareFragment"
-        android:label="Lista Loans"
-        tools:layout="@layout/fragment_share" />
+        android:name="co.edu.unal.se1_app.presentation.ui.edit.editInventaryFragment"
+        android:label="Editar Inventario"
+        tools:layout="@layout/fragment_edit_inventary" />
 
 
 </navigation>

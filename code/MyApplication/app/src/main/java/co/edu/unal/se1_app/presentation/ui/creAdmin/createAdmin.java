@@ -23,6 +23,7 @@ public class createAdmin extends Fragment {
 
         Button button2= (Button) root.findViewById(R.id.c_space);
         Button button3= (Button) root.findViewById(R.id.c_office);
+        Button button4= (Button) root.findViewById(R.id.c_implement);
         button2.setOnClickListener(
                 new View.OnClickListener()
                 {
@@ -43,6 +44,21 @@ public class createAdmin extends Fragment {
                         manager.beginTransaction().replace(R.id.nav_host_fragment,del,del.getTag()).commit();
                     }
                 });
+
+
+        button4.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                        createImplementFragment del = new createImplementFragment();
+                        FragmentManager manager= getFragmentManager();
+                        manager.beginTransaction().replace(R.id.nav_host_fragment,del,del.getTag()).commit();
+                    }
+                });
+
+
+
 
 
         return root;

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -26,9 +27,14 @@ public class deleteUserFragment extends Fragment {
                 {
                     public void onClick(View view)
                     {
+
                         Long user= Long.parseLong(idOffice.getText().toString());
                         StudentController studentController= new StudentController();
                         studentController.deleteStudent(user);
+                        Toast toast1 =
+                                Toast.makeText(getActivity().getApplicationContext(),
+                                        "Usuario Eliminado" , Toast.LENGTH_SHORT);
+                        toast1.show();
                         System.out.println(user);
 
                     }
