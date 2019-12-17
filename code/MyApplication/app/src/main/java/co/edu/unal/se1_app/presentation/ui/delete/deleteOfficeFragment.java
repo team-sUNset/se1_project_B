@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import co.edu.unal.se1_app.R;
+import co.edu.unal.se1_app.businessLogic.controller.OfficeController;
 
 public class deleteOfficeFragment extends Fragment {
 
@@ -26,7 +27,10 @@ public class deleteOfficeFragment extends Fragment {
                 {
                     public void onClick(View view)
                     {
-                        String office= idOffice.getText().toString();
+                        Long  office= Long.parseLong(idOffice.getText().toString());
+
+                        OfficeController officeController= new OfficeController();
+                        officeController.deleteOffice(office);
                         System.out.println(office);
 
                     }

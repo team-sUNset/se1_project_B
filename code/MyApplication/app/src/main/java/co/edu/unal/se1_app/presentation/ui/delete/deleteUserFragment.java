@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import co.edu.unal.se1_app.R;
+import co.edu.unal.se1_app.businessLogic.controller.StudentController;
 
 public class deleteUserFragment extends Fragment {
 
@@ -25,8 +26,10 @@ public class deleteUserFragment extends Fragment {
                 {
                     public void onClick(View view)
                     {
-                        String office= idOffice.getText().toString();
-                        System.out.println(office);
+                        Long user= Long.parseLong(idOffice.getText().toString());
+                        StudentController studentController= new StudentController();
+                        studentController.deleteStudent(user);
+                        System.out.println(user);
 
                     }
                 });

@@ -16,92 +16,126 @@ import androidx.fragment.app.Fragment;
 
 import co.edu.unal.se1_app.R;
 import co.edu.unal.se1_app.businessLogic.controller.AdminController;
+import co.edu.unal.se1_app.businessLogic.controller.EquipmentController;
+import co.edu.unal.se1_app.businessLogic.controller.OfficeController;
 import co.edu.unal.se1_app.businessLogic.controller.ReserveController;
 import co.edu.unal.se1_app.dataAccess.callback.AdminCallback;
+import co.edu.unal.se1_app.dataAccess.callback.EquipmentListCallback;
+import co.edu.unal.se1_app.dataAccess.callback.OfficeListCallback;
 import co.edu.unal.se1_app.dataAccess.callback.ReserveCallback;
 import co.edu.unal.se1_app.dataAccess.model.Admin;
+import co.edu.unal.se1_app.dataAccess.model.Equipment;
+import co.edu.unal.se1_app.dataAccess.model.Office;
 import co.edu.unal.se1_app.dataAccess.model.Reserve;
 import co.edu.unal.se1_app.presentation.MainActivity;
 import co.edu.unal.se1_app.presentation.MainMenuUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class reserveFragment extends Fragment {
 
-    private Spinner offices;
-    private Spinner implementos;
-
+    private Spinner s_offices;
+    private Spinner s_implementos;
+    Long eqID = null;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_reserve, container, false);
-        offices= (Spinner)root.findViewById(R.id.spinner_offices);
-        implementos =(Spinner)root.findViewById(R.id.spinner_implements);
-        ArrayList<String> elementos= new ArrayList<String>();
-        elementos.add("El 1");
-        elementos.add("El 2");
-        elementos.add("El 3");
-        elementos.add("El 4");
-        ArrayList<String> oficinas= new ArrayList<String>();
-        oficinas.add("Office 1");
-        oficinas.add("Office 2");
-        oficinas.add("Office 3");
-        oficinas.add("Office 4");
-        ArrayAdapter adp = new ArrayAdapter(this.getActivity() ,android.R.layout.simple_spinner_item,oficinas);
-        adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        offices.setAdapter(adp);
-        final String[] oficina = new String[1];
-        offices.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        s_offices = (Spinner)root.findViewById(R.id.spinner_offices);
+        s_implementos =(Spinner)root.findViewById(R.id.spinner_implements);
+
+        ArrayList<String> elementos = new ArrayList<String>();
+        ArrayList<Long> elementosID = new ArrayList<Long>();
+        ArrayList<String> oficinas = new ArrayList<String>();
+        ArrayList<Long> oficinasID = new ArrayList<Long>();
+
+        OfficeController officeController = new OfficeController();
+        EquipmentController equipmentController = new EquipmentController();
+        ReserveController reserveController = new ReserveController();
+
+        officeController.getOffices(new OfficeListCallback() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                oficina[0] = (String) offices.getAdapter().getItem(position);
-                Toast.makeText(getActivity() ,"Seleccionaste : "+ oficina[0],Toast.LENGTH_SHORT).show();
+            public void onSuccess(@NonNull List<Office> offices) {
+                for( Office of : offices ){
+                    oficinas.add( of.getName() );
+                    oficinasID.add( of.getId() );
+                }
+
+                ArrayAdapter adp = new ArrayAdapter(getActivity() ,android.R.layout.simple_spinner_item,oficinas);
+                adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                s_offices.setAdapter(adp);
+                s_offices.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        Toast.makeText(getActivity() ,"Seleccionaste : "+ oficinas.get(position),Toast.LENGTH_SHORT).show();
+                        officeController.equipmentInOfice( oficinasID.get(position), new EquipmentListCallback() {
+                            @Override
+                            public void onSuccess(@NonNull List<Equipment> equipment) {
+                                elementos.clear();
+                                for( Equipment eq : equipment ){
+                                    elementos.add( eq.getName() );
+                                    elementosID.add( eq.getId() );
+                                }
+
+                                ArrayAdapter adp2 = new ArrayAdapter(getActivity() ,android.R.layout.simple_spinner_item,elementos);
+                                adp2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                s_implementos.setAdapter(adp2);
+                                s_implementos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        eqID = elementosID.get( position );
+                                        Toast.makeText(getActivity() ,"Seleccionaste: "+ elementos.get(position),Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+                                        eqID = null;
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable throwable) {
+                                System.out.println("Message Crear Reserva: " + throwable.getMessage());
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        eqID = null;
+                    }
+                });
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        final String[] elemento = new String[1];
-        ArrayAdapter adp2 = new ArrayAdapter(this.getActivity() ,android.R.layout.simple_spinner_item,elementos);
-        adp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        implementos.setAdapter(adp2);
-        implementos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                elemento[0] = (String) implementos.getAdapter().getItem(position);
-                Toast.makeText(getActivity() ,"Seleccionaste: "+ elemento[0],Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onError(@NonNull Throwable throwable) {
+                System.out.println("Message Crear Reserva: " + throwable.getMessage());
             }
         });
 
         Long user = MainActivity.main_user();
-        final EditText startD= (EditText) root.findViewById(R.id.dayStart);
-        final EditText endD= (EditText) root.findViewById(R.id.dayEnd);
-        final EditText startT= (EditText) root.findViewById(R.id.timeStart);
-        final EditText endT= (EditText) root.findViewById(R.id.timeEnd);
-        final Button boton= (Button) root.findViewById(R.id.reservar);
-
-
+        final EditText startD = (EditText) root.findViewById(R.id.dayStart);
+        final EditText startT = (EditText) root.findViewById(R.id.timeStart);
+        final Button boton = (Button) root.findViewById(R.id.reservar);
 
         boton.setOnClickListener(
                 new View.OnClickListener()
                 {
                     public void onClick(View view)
                     {
+
+                        Toast toast1 =
+                                Toast.makeText(getActivity().getApplicationContext(),
+                                        "Seleccione Oficina e Implemento" , Toast.LENGTH_SHORT);
+                        toast1.show();
+
                         String startDateTime= startD.getText().toString()+" "+startT.getText().toString();
-                        String endDateTime= endD.getText().toString()+" "+endT.getText().toString();
-                        Long elem= Long.parseLong("6");
 
                         ReserveController reserveController = new ReserveController();
-                        Reserve reserve= new Reserve(false, user,elem,startDateTime,endDateTime);
+                        Reserve reserve = new Reserve(false, user, eqID ,startDateTime,"X");
                         reserveController.createReserve(reserve,new ReserveCallback() {
                             @Override
                             public void onSuccess(@NonNull Reserve reserve) {
@@ -122,14 +156,6 @@ public class reserveFragment extends Fragment {
                         });
                     }
                 });
-
-
-
-
-
-
-
-
 
         return root;
     }

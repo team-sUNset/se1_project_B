@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onError(@NonNull Throwable throwable) {
                                 Toast toast1 =
                                         Toast.makeText(getApplicationContext(),
-                                                "Error: Usurio o contraseña incorrecta" , Toast.LENGTH_SHORT);
+                                                "Error: Usuario o contraseña incorrecta" , Toast.LENGTH_SHORT);
                                 toast1.show();
                             }
 

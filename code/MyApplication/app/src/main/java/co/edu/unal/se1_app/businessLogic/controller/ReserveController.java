@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import co.edu.unal.se1_app.dataAccess.callback.EquipmentCallback;
+import co.edu.unal.se1_app.dataAccess.callback.IntegerCallback;
 import co.edu.unal.se1_app.dataAccess.callback.ReserveCallback;
 import co.edu.unal.se1_app.dataAccess.callback.ReserveListCallback;
 import co.edu.unal.se1_app.dataAccess.callback.SpaceCallback;
@@ -46,22 +47,34 @@ public class ReserveController {
                     equipmentRepository.getEquipmentById(reserve.getElementId(), new EquipmentCallback() {
                         @Override
                         public void onSuccess(@NonNull Equipment equipment) {
-                            if (countReserves(reserve.getElementId(), reserve.isType(),
-                                    reserve.getStartDateTime()) >= equipment.getStock() ) {
-                                callbacks.onError(new Exception("Not enough stock"));
-                            }else {
-                                reserveRepository.createReserve(reserve, new ReserveCallback() {
-                                    @Override
-                                    public void onSuccess(@NonNull Reserve created) {
-                                        callbacks.onSuccess(created);
-                                    }
+                            countReserves(reserve.getElementId(), reserve.isType(),
+                                    reserve.getStartDateTime(), new IntegerCallback() {
+                                        @Override
+                                        public void onSuccess(@NonNull Integer integer) {
+                                            if (integer.intValue() >= equipment.getStock() ) {
+                                                callbacks.onError(new Exception("Not enough stock"));
+                                            }else {
+                                                reserveRepository.createReserve(reserve, new ReserveCallback() {
+                                                    @Override
+                                                    public void onSuccess(@NonNull Reserve created) {
+                                                        System.out.println("---------------- CREADA");
+                                                        callbacks.onSuccess(created);
+                                                    }
 
-                                    @Override
-                                    public void onError(@NonNull Throwable throwable) {
-                                        callbacks.onError(throwable);
-                                    }
-                                });
-                            }
+                                                    @Override
+                                                    public void onError(@NonNull Throwable throwable) {
+                                                        System.out.println("---------------- CONTROLLER " + throwable.getMessage());
+                                                        callbacks.onError(throwable);
+                                                    }
+                                                });
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onError(@NonNull Throwable throwable) {
+                                            callbacks.onError( throwable );
+                                        }
+                                    });
                         }
 
                         @Override
@@ -83,22 +96,32 @@ public class ReserveController {
                     spaceRepository.getSpaceById(reserve.getElementId(), new SpaceCallback() {
                         @Override
                         public void onSuccess(@NonNull Space space) {
-                            if (countReserves(reserve.getElementId(), reserve.isType(),
-                                    reserve.getStartDateTime()) != 0) {
-                                callbacks.onError(new Exception("Space not available"));
-                            }else{
-                                reserveRepository.createReserve(reserve, new ReserveCallback() {
-                                    @Override
-                                    public void onSuccess(@NonNull Reserve created) {
-                                        callbacks.onSuccess(created);
-                                    }
+                            countReserves(reserve.getElementId(), reserve.isType(),
+                                    reserve.getStartDateTime(), new IntegerCallback() {
+                                        @Override
+                                        public void onSuccess(@NonNull Integer integer) {
+                                            if ( integer.intValue() != 0) {
+                                                callbacks.onError(new Exception("Space not available"));
+                                            }else{
+                                                reserveRepository.createReserve(reserve, new ReserveCallback() {
+                                                    @Override
+                                                    public void onSuccess(@NonNull Reserve created) {
+                                                        callbacks.onSuccess(created);
+                                                    }
 
-                                    @Override
-                                    public void onError(@NonNull Throwable throwable) {
-                                        callbacks.onError(throwable);
-                                    }
-                                });
-                            }
+                                                    @Override
+                                                    public void onError(@NonNull Throwable throwable) {
+                                                        callbacks.onError(throwable);
+                                                    }
+                                                });
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onError(@NonNull Throwable throwable) {
+
+                                        }
+                                    });
                         }
 
                         @Override
@@ -146,28 +169,24 @@ public class ReserveController {
         return true;
     }
 
-    private List<Reserve> list;
-
-    private int countReserves( Long id , boolean type ,  String date ){
-        int count = 0;
-
-        reserveRepository.getReserves(new ReserveListCallback() {
+    private void countReserves( Long id , boolean type ,  String date , @Nullable IntegerCallback callbacks ){
+        reserveRepository.getReserves( new ReserveListCallback() {
             @Override
             public void onSuccess(@NonNull List<Reserve> reserves) {
-                list = reserves;
+                int count = 0;
+                for( Reserve r : reserves ){
+                    if( r.isType() == type && id.equals( r.getId() ) && date.equals( r.getStartDateTime() ) )
+                        count ++;
+                }
+                callbacks.onSuccess( Integer.valueOf( count ) );
             }
 
             @Override
             public void onError(@NonNull Throwable throwable) {
-                list = new ArrayList<>();
                 System.out.println("Reserve Controller: " + throwable.getMessage());
+                callbacks.onError( throwable );
             }
         });
-        for( Reserve r : list ){
-            if( r.isType() == type && id.equals( r.getId() ) && date.equals( r.getStartDateTime() ) )
-                count ++;
-        }
-        return count;
     }
 
     public void getReserves ( @Nullable ReserveListCallback callbacks ){
